@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProdutoController;
 
-Route::get('/', [ClienteController::class, 'clientes']);
+Route::get('/',[ClienteController::class, 'clientes']);
+Route::get('/cliente/showall', [ClienteController::class, 'showall']);
 
 
 //Rotas Produto

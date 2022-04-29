@@ -8,12 +8,11 @@
 </head>
 <body>
     <h1>Clientes</h1>
-        @foreach ($cliente as $cliente)
+        @foreach ($cliente as $c)
             <div class="card-body">
-                <p>Cliente: {{ $cliente->nome }}</p>
-                <p>CPF: {{ $cliente->cpf }}</p>
-                <a href="/cliente/{{ $cliente->id }}">Ver Mais</a>
-            </div>
+                <p>Cliente: {{ $c->nome }}</p>
+                <p>CPF: {{ $c->cpf }}</p>
+
         @endforeach
 </body>
 </html>
