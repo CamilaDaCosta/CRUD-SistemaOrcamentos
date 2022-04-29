@@ -9,7 +9,6 @@ Route::get('/', [ClienteController::class, 'clientes']);
 
 
 //Rotas Produto
-
 Route::get('/produto/showall', [ProdutoController::class, 'showAll']); //Mostrar todos os produtos
 Route::get('/produto/{id}', [ProdutoController::class, 'show']); //Monstrar produto por id
 
