@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class ClienteController extends Controller
 {
     public function clientes(){
-        return view('cliente.create');
+        return view('cliente.showall');
     }
 }
