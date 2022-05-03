@@ -45,6 +45,38 @@ class ClienteController extends Controller
 
         $endereco->save();
 
-        return redirect('cliente/showall');
+        return redirect('/');
+    }
+
+    public function show($id){
+        $cliente = Cliente::findOrFail($id);
+        $endereco = Endereco::findOrFail($id);//RETORNA COM O ID DO ENDERECO REFERENTE AO CLIENTE
+        return view('cliente.show', ['cliente' => $cliente, 'endereco' => $endereco]);//só funciona se o id dos dois for igual
+    }
+
+    public function edit($id){
+        $cliente = Cliente::find($id);
+        $endereco = Endereco::find($id);
+        return view('cliente.create',compact('cliente','endereco'));
+    }
+
+    // ALTERAR DADOS DAS TABELAS CLIENTE E ENDERECO
+    public function update(Request $request, $id){
+        Cliente::where(['id'=>$id])->update([
+            'nome'=>$request->nome,
+            'cpf'=>$request->cpf,
+            'telefone'=>$request->telefone,
+            'email'=>$request->email,
+            'profissao'=>$request->profissao,
+        ]);
+        Endereco::where(['id'=>$id])->update([
+            'cep'=>$request->cep,
+            'logradouro'=>$request->logradouro,
+            'numero'=>$request->numero,
+            'complemento'=>$request->complemento,
+            'cidade'=>$request->cidade,
+            'estado'=>$request->estado
+        ]);
+        return redirect('/');
     }
 }

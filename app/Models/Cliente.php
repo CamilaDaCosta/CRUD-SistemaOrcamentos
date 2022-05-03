@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     public function endereco(){
         return $this->hasOne(Endereco::class, 'id_cliente');// 1 para 1
     }
