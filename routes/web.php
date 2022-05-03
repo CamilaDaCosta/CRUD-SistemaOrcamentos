@@ -25,6 +25,7 @@ Route::post('produto/', [ProdutoController::class, 'store']);
 /**
  * show -> MÉTODO/ACTION PADRÃO PARA EXIBIR OS DADOS DAS TABELAS
  */
+Route::get('/cliente/{id}', [ClienteController::class, 'show']);
 Route::get('/produto/{id}', [ProdutoController::class, 'show']); //Monstrar produto por id
 
 /**
@@ -37,5 +38,7 @@ Route::delete('/produto/{id}', [ProdutoController::class, 'destroy']); //Delete 
  * update -> MÉTODO/ACTION PADRÃO PARA ATUALIZAR OS DADOS DAS TABELAS
  */
 Route::put('/produto/update/{id}', [ProdutoController::class, 'update']);
+Route::put('/cliente/{id}/update', [ClienteController::class, 'update']);
 
+Route::get('/cliente/{id}/edit', [ClienteController::class, 'edit']);
 Route::get('/produto/edit/{id}', [ProdutoController::class, 'edit']);
