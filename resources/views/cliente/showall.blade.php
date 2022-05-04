@@ -8,14 +8,31 @@
 @section('content')
 
     <h1>Clientes ||| <a href="/cliente/create">Cadastrar Novo</a></h1>
+    <div class="campo">
+        <!--form action="{{--url("cliente/search")--}}" method="POST"-->
+        <form action="/" method="GET">
+            @csrf
+            <label for="text">Busque Por Clientes</label>
+            <!--input type="text" name="filter" id="filter" placeholder="Busque um Cliente"-->
+            <input type="text" name="search" id="search" placeholder="Busque um Cliente">
+            <input type="submit" value="Buscar">
+        </form>
+        <form action="/" method="GET">
+            @csrf
+            <label for="text">Busque Por Endereco</label>
+            <!--input type="text" name="filter" id="filter" placeholder="Busque um Cliente"-->
+            <input type="text" name="searchEnd" id="searchEnd" placeholder="Busque por Endereco">
+            <input type="submit" value="Buscar">
+        </form>
+    </div>
         <table border="1">
             <thead>
                 <tr>
                     <th scope="col">Cliente</th>
                     <th scope="col">CPF</th>
                     <th scope="col">Telefone</th>
-                    <th colspan="2">Ações</th>
-                    <th scope="col">Ver</th>
+                    <th>Cidade</th>
+                    <th colspan="3">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,9 +41,16 @@
                         <td>{{ $c->nome }}</td>
                         <td>{{ $c->cpf }}</td>
                         <td>{{ $c->telefone }}</td>
-                        <td><a href="{{url("cliente/$c->id/edit")}}">Editar</td>
-                        <td>Excluir</td>
-                        <td><a href="/cliente/{{ $c->id }}">VER</a></td>
+                        <!--td>{{-- $c->endereco->cidade--}}</td-->
+                        <td><button><a href="{{url("cliente/$c->id/edit")}}">Editar</button></td>
+                        <td>
+                            <form action="/cliente/{{ $c->id }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" value="Excluir">
+                            </form>
+                        </td>
+                        <td><button><a href="/cliente/{{ $c->id }}">Visualizar</a></button></td>
                     </tr>
                 @endforeach
             </tbody>

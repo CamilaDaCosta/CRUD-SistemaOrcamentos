@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProdutoController;
 
+
+//Route::post('/cliente/search', [ClienteController::class,'search']);
 //ROTAS DAS REQUISIÇÕES showall
 
 Route::get('/',[ClienteController::class, 'showall']); //REQUISIÇÃO INICIAL
@@ -31,6 +33,7 @@ Route::get('/produto/{id}', [ProdutoController::class, 'show']); //Monstrar prod
 /**
  * delete -> MÉTODO/ACTION PADRÃO PARA DELETAR OS DADOS DAS TABELAS
  */
+Route::delete('/cliente/{id}', [ClienteController::class, 'destroy']);
 Route::delete('/produto/{id}', [ProdutoController::class, 'destroy']); //Delete Produto
 
 

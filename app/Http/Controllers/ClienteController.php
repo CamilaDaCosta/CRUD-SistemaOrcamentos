@@ -8,15 +8,34 @@ use App\Models\Endereco;
 
 class ClienteController extends Controller
 {
+    // private $repo;
+    // public function __construct(Cliente $cliente){
+    //     $this->repo = $cliente;
+    // }
+
     public function clientes(){
         return view('cliente.create');
     }
 
     public function showall()
     {
-        $cliente = Cliente::all();
+        $search = request('search');
+        $searchEnd = request('searchEnd');
+        if ($search) {
+            $cliente = Cliente::where('nome', 'like', '%' . $search . '%') //BUSCA PELO NOME
+            ->orWhere('cpf', 'like', '%' . $search . '%')->get();//BUSCA PELO CPF
+        } else if ($searchEnd){
+            $cliente = Cliente::select('clientes.nome','clientes.cpf', 'clientes.telefone', 'enderecos.cidade')
+            ->join('enderecos','clientes.id', '=', 'enderecos.id_cliente')
+            ->where('cidade', 'like', "%{$searchEnd}%")->get();
+        }
+         else {
+            $cliente = Cliente::all();
+        }
+
         return view('cliente/showall', ['cliente' => $cliente]);
     }
+
     public function create(){
         return view('cliente.create');
     }
@@ -79,4 +98,16 @@ class ClienteController extends Controller
         ]);
         return redirect('/');
     }
+
+    public function destroy($id){
+        Cliente::findOrFail($id)->delete();
+        Endereco::findOrFail($id)->delete();
+        return redirect('/');
+    }
+
+    // public function search(Request $request){
+    //     //dd($request->all());
+    //     $clientes = $this->repo->search($request->filter);
+    //     //return view('cliente.showall',['cliente' => $clientes]);
+    // }
 }
