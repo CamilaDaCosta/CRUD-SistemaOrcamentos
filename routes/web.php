@@ -9,7 +9,7 @@ use App\Http\Controllers\ProdutoController;
 //Route::post('/cliente/search', [ClienteController::class,'search']);
 //ROTAS DAS REQUISIÇÕES showall
 
-Route::get('/',[ClienteController::class, 'showall']); //REQUISIÇÃO INICIAL
+Route::get('/', [ClienteController::class, 'showall']); //REQUISIÇÃO INICIAL
 Route::get('/produto/showall', [ProdutoController::class, 'showAll']); //Mostrar todos os produtos
 
 /**

@@ -9,4 +9,9 @@ class Produto extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function orcamentosDoProduto()
+    {
+        return $this->belongsToMany(Orcamento::class, 'orcamento_produtos');
+    }
 }
