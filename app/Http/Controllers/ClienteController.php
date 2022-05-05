@@ -26,6 +26,8 @@ class ClienteController extends Controller
             $cliente = Cliente::where('nome', 'like', '%' . $search . '%') //BUSCA PELO NOME
             ->orWhere('cpf', 'like', '%' . $search . '%')->get();//BUSCA PELO CPF
         } else if ($searchEnd){
+            $cli = Endereco::select('enderecos.id_cliente')->pluck('id_cliente');
+            foreach ($cli as $cli){}
             $cliente = Cliente::select('clientes.nome','clientes.cpf', 'clientes.telefone')
             ->join('enderecos','clientes.id', '=', 'enderecos.id_cliente')
             ->where('cidade', 'like', "%{$searchEnd}%")->get();
@@ -34,7 +36,7 @@ class ClienteController extends Controller
             ->join('clientes','enderecos.id_cliente','=','clientes.id')
             ->where('cidade', 'like', "%{$searchEnd}%")->pluck('cidade');
             foreach ($e as $e){}
-            return view('cliente/showall', ['cliente' => $cliente, 'endereco' => $endereco, 'e' => $e]);
+            return view('cliente/showall', ['cliente' => $cliente, 'endereco' => $endereco, 'e' => $e,'cli' => $cli]);
         }
          else {
             $cliente = Cliente::all();

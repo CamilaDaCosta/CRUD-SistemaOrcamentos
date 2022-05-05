@@ -45,15 +45,25 @@
                         <td>@if(isset($c->endereco->cidade)) {{$c->endereco->cidade}} @else
                                 {{$e}}
                             @endif</td>
-                        <td><button><a href="{{url("cliente/$c->id/edit")}}">Editar</button></td>
+                        <td><button>
+                            @if(isset($c->id)) <a href="{{url("cliente/$c->id/edit")}}">Editar</button></td>
+                                @else <a href="{{url("cliente/$cli/edit")}}">Editar </button></td>
+                            @endif
                         <td>
-                            <form action="/cliente/{{ $c->id }}" method="POST">
+                            @if(isset($c->id))
+                                <form action="/cliente/{{ $c->id }}" method="POST">
+                                @else
+                                    <form action="/cliente/{{ $cli }}" method="POST">
+                                        @endif
                                 @csrf
                                 @method('DELETE')
                                 <input type="submit" value="Excluir">
                             </form>
                         </td>
-                        <td><button><a href="/cliente/{{ $c->id }}">Visualizar</a></button></td>
+                        <td><button>
+                            @if(isset($c->id))<a href="/cliente/{{ $c->id }}">Visualizar</a></button></td>
+                                @else <a href="{{url("cliente/$cli")}}">Visualizar </button></td>
+                            @endif
                     </tr>
                 @endforeach
             </tbody>
