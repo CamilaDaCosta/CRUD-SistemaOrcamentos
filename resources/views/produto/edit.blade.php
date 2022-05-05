@@ -1,3 +1,11 @@
+{{-- extende de /layout/main.blade.php o layout total do html --}}
+@extends('layouts.main')
+
+{{-- selecione "CRUD" como parâmetro de title --}}
+@section('title', "Editar $produto->descricao")
+
+{{-- selectiona o paramentro de content, dentro da section até o final --}}
+@section('content')
 <div>
     <h1>Editando Produto: {{ $produto->descricao }}</h1>
     <form action="/produto/update/{{ $produto->id }}" method="POST">
@@ -36,3 +44,4 @@
         <input type="submit" value="Atualizar">
     </form>
 </div>
+@endsection

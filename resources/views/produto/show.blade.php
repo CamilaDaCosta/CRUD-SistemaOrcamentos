@@ -1,3 +1,11 @@
+{{-- extende de /layout/main.blade.php o layout total do html --}}
+@extends('layouts.main')
+
+{{-- selecione "CRUD" como parâmetro de title --}}
+@section('title', "$produto->descricao")
+
+{{-- selectiona o paramentro de content, dentro da section até o final --}}
+@section('content')
 <div>
     <div>
         <div>
@@ -8,10 +16,5 @@
             <p>Valor: {{ $produto->valor }}</p>
         </div>
     </div>
-    <a href="/produto/edit/{{ $produto->id }}">Update</a>
-    <form action="/produto/{{ $produto->id }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Delete</button>
-    </form>
 </div>
+@endsection
