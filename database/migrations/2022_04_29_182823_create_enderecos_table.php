@@ -35,8 +35,8 @@ return new class extends Migration
     {
         Schema::dropIfExists('enderecos');
         $table->foreign('id_cliente')
-        ->references('id')
-        ->on('clientes')
-        ->onDelete('cascade');
+            ->references('id')
+            ->on('clientes')
+            ->onDelete('cascade');
     }
 };

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('orcamentos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('cliente_id')->constrained();
+            $table->foreignId('cliente_id')->constrained()->onDelete('cascade');
             $table->string("situacao");
             $table->float("valortotal");
             $table->dateTime("data");
