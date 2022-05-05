@@ -41,7 +41,10 @@
                         <td>{{ $c->nome }}</td>
                         <td>{{ $c->cpf }}</td>
                         <td>{{ $c->telefone }}</td>
-                        <!--td>{{-- $c->endereco->cidade--}}</td-->
+
+                        <td>@if(isset($c->endereco->cidade)) {{$c->endereco->cidade}} @else
+                                {{$e}}
+                            @endif</td>
                         <td><button><a href="{{url("cliente/$c->id/edit")}}">Editar</button></td>
                         <td>
                             <form action="/cliente/{{ $c->id }}" method="POST">

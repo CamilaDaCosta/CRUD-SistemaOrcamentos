@@ -19,21 +19,28 @@ class ClienteController extends Controller
 
     public function showall()
     {
+        $endereco = Endereco::all();
         $search = request('search');
         $searchEnd = request('searchEnd');
         if ($search) {
             $cliente = Cliente::where('nome', 'like', '%' . $search . '%') //BUSCA PELO NOME
             ->orWhere('cpf', 'like', '%' . $search . '%')->get();//BUSCA PELO CPF
         } else if ($searchEnd){
-            $cliente = Cliente::select('clientes.nome','clientes.cpf', 'clientes.telefone', 'enderecos.cidade')
+            $cliente = Cliente::select('clientes.nome','clientes.cpf', 'clientes.telefone')
             ->join('enderecos','clientes.id', '=', 'enderecos.id_cliente')
             ->where('cidade', 'like', "%{$searchEnd}%")->get();
+
+            $e = Endereco::select('enderecos.cidade')
+            ->join('clientes','enderecos.id_cliente','=','clientes.id')
+            ->where('cidade', 'like', "%{$searchEnd}%")->pluck('cidade');
+            foreach ($e as $e){}
+            return view('cliente/showall', ['cliente' => $cliente, 'endereco' => $endereco, 'e' => $e]);
         }
          else {
             $cliente = Cliente::all();
         }
 
-        return view('cliente/showall', ['cliente' => $cliente]);
+        return view('cliente/showall', ['cliente' => $cliente, 'endereco' => $endereco]);
     }
 
     public function create(){
