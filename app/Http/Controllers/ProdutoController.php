@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ProdutoController extends Controller
 {
     //-> Mostrar todos os produtos
-    public function showAll()
+    public function showall()
     {
         $produtos = Produto::all();
         return view('produto/showall', ['produtos' => $produtos]);
