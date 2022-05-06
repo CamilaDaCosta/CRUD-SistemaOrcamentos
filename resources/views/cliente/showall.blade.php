@@ -43,7 +43,7 @@
                         <td>{{ $c->telefone }}</td>
 
                         <td>@if(isset($c->endereco->cidade)) {{$c->endereco->cidade}} @else
-                                {{$e}}
+                                @if (isset($e)) {{$e}} @else Sem Registro @endif
                             @endif</td>
                         <td><button>
                             @if(isset($c->id)) <a href="{{url("cliente/$c->id/edit")}}">Editar</button></td>
