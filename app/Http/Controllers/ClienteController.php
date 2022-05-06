@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+
 use App\Models\Cliente;
 use App\Models\Endereco;
 
 class ClienteController extends Controller
 {
-    // private $repo;
-    // public function __construct(Cliente $cliente){
-    //     $this->repo = $cliente;
-    // }
+    public function consumir(){//ECEMPLO DE API PARA CONSUMIR
+        $response = Http::get('http://localhost:8000/api/clientes');
+        dd($response->json());
+    }
 
     public function clientes(){
         return view('cliente.create');

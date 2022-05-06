@@ -9,8 +9,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('showall', [ClienteControllerApi::class, 'showall']);
-
-Route::post('store', [ClienteControllerApi::class, 'store']);
-
-Route::delete('delete/{id}', [ClienteControllerApi::class, 'destroy']);
+/**
+ * TODAS AS ROTAS SÃO ACESSADAS POR AQUI
+ * api/clientes = MOSTRAR TODOS
+ * api/clientes/1 = MOSTRAR APENAS CLIENTE DE ID 1
+ */
+Route::apiResource('clientes', ClienteControllerApi::class);
