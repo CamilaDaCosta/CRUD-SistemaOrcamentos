@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\Produto as ProdutoResource;
 use Illuminate\Http\Request;
 use App\Models\Produto;
