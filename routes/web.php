@@ -11,7 +11,7 @@ use App\Models\Orcamento;
 //Route::post('/cliente/search', [ClienteController::class,'search']);
 //ROTAS DAS REQUISIÇÕES showall
 
-Route::get('/consumirapi', [ClienteController::class, 'consumir']); //EXEMPLO DE API PARA CONSUMIR
+Route::get('/consumirapi',[ClienteController::class,'consumir']); //EXEMPLO DE API PARA CONSUMIR
 
 Route::get('/', [ClienteController::class, 'showall']); //REQUISIÇÃO INICIAL
 Route::get('/produto/showall', [ProdutoController::class, 'showall']); //Mostrar todos os produtos
