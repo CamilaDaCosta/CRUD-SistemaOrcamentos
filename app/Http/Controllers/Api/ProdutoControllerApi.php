@@ -15,10 +15,10 @@ class ProdutoControllerApi extends Controller
      */
     public function shwoall()
     {
-        //$todosProdutos = Produto::paginate(15);
-        //return ProdutoResource::collection($todosProdutos);
-        $produtos = Produto::all();
-        return $produtos;
+        $todosProdutos = Produto::paginate(15);
+        return ProdutoResource::collection($todosProdutos);
+        //$produtos = Produto::all();
+        //return $produtos;
     }
 
     /**
