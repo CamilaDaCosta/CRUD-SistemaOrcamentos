@@ -18,9 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  */
 Route::apiResource('clientes', ClienteControllerApi::class);
 
-<<<<<<< HEAD
-Route::apiResource('produtos', ProdutoControllerApi::class);
-=======
 /**
  * CONSULTAR ENDERECOS = http://localhost:8000/api/clientes/ID/endereco
  */
@@ -41,4 +38,3 @@ Route::put('produto/{id}', [ProdutoControllerApi::class, 'update']);
 
 // deletar objeto
 Route::delete('produto/{id}', [ProdutoControllerApi::class, 'destroy']);
->>>>>>> b0663e07802a8aa29d514af1bf307afb1e164f31
