@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\ClienteControllerApi;
 use App\Http\Controllers\Api\ProdutoControllerApi;
-use App\Http\Resources\Produto;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -18,18 +17,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  */
 Route::apiResource('clientes', ClienteControllerApi::class);
 
-
-// listar de todos os objetos
-Route::get('produtos', [ProdutoControllerApi::class, 'shwoall']);
-
-// listar um objeto por ID
-Route::get('produto/{id}', [ProdutoControllerApi::class, 'show']);
-
-// salvar novo objeto
-Route::post('produto', [ProdutoControllerApi::class, 'store']);
-
-// atualizar objeto
-Route::put('produto/{id}', [ProdutoControllerApi::class, 'update']);
-
-// deletar objeto
-Route::delete('produto/{id}', [ProdutoControllerApi::class, 'destroy']);
+Route::apiResource('produtos', ProdutoControllerApi::class);
