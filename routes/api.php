@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\ClienteControllerApi;
+use App\Http\Controllers\Api\EnderecoControllerApi;
 use App\Http\Controllers\Api\ProdutoControllerApi;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -17,4 +18,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  */
 Route::apiResource('clientes', ClienteControllerApi::class);
 
+<<<<<<< HEAD
 Route::apiResource('produtos', ProdutoControllerApi::class);
+=======
+/**
+ * CONSULTAR ENDERECOS = http://localhost:8000/api/clientes/ID/endereco
+ */
+Route::apiResource('clientes.endereco', EnderecoControllerApi::class);
+
+
+// listar de todos os objetos
+Route::get('produtos', [ProdutoControllerApi::class, 'shwoall']);
+
+// listar um objeto por ID
+Route::get('produto/{id}', [ProdutoControllerApi::class, 'show']);
+
+// salvar novo objeto
+Route::post('produto', [ProdutoControllerApi::class, 'store']);
+
+// atualizar objeto
+Route::put('produto/{id}', [ProdutoControllerApi::class, 'update']);
+
+// deletar objeto
+Route::delete('produto/{id}', [ProdutoControllerApi::class, 'destroy']);
+>>>>>>> b0663e07802a8aa29d514af1bf307afb1e164f31

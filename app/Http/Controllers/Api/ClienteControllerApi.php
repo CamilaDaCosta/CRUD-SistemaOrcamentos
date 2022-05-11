@@ -16,16 +16,16 @@ class ClienteControllerApi extends Controller
         $this->cliente = $cliente;
         $this->endereco = $endereco;
     }
-    //SHOWALL
+
     public function index()
     { //RETORNA TODOS OS CLIENTES SEUS DADOS DE CADASTRO E ENDERECO
         return $this->cliente->with('endereco')->paginate();
     }
 
     //CLIENTES/ID
-    public function show(CLiente $cliente)
-    { //RETORNA APENAS O CLIENTE QUE FOR PASSADO O ID
-        return $cliente;
+    public function show(Cliente $cliente, Endereco $endereco){ // RETORNA CLIENTE E ENDERECO PELO ID DO CLIENTE
+        $getEnd = $endereco->where('id_cliente','=',$cliente->id)->get();
+        return [$cliente, $getEnd];
     }
 
     public function store(Request $request)
