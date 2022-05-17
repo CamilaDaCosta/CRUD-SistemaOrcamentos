@@ -31,7 +31,6 @@ class ClienteControllerApi extends Controller
 
     public function store(Request $request)
     {
-        //return [$this->cliente->create($request->all()), $this->endereco->create($request->all())];
         $cliente = new Cliente;
 
         $cliente->nome = $request->input('nome');
@@ -55,12 +54,51 @@ class ClienteControllerApi extends Controller
         $endereco->save();
 
         return [$cliente, $endereco];
+
+        // $c = Cliente::create([
+        //     "nome" => $request->nome,
+        //     "cpf" => $request->cpf,
+        //     "telefone" => $request->telefone,
+        //     "email" => $request->email,
+        //     "profissao" => $request->profissao
+        // ]);
+        // $e = Endereco::create([
+        //     "cep" => $request->cep,
+        //     "logradouro" => $request->logradouro,
+        //     "numero" => $request->numero,
+        //     "complemento" => $request->complemento,
+        //     "cidade" => $request->cidade,
+        //     "estado" => $request->estado,
+        //     "id_cliente" => $c->id
+        // ]);
+        // return [$c, $e];
     }
 
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, $id)
     {
-        $cliente->update($request->all());
-        return $cliente;
+        $c = Cliente::findOrFail($id);
+        $c->update([
+                "nome" => $request->nome,
+                "cpf" => $request->cpf,
+                "telefone" => $request->telefone,
+                "email" => $request->email,
+                "profissao" => $request->profissao
+            ]);
+        $e = Endereco::all();
+        foreach ($e as $e){
+            if ($id == $e->id_cliente){
+                $e->update([
+                    "cep" => $request->cep,
+                    "logradouro" => $request->logradouro,
+                    "numero" => $request->numero,
+                    "complemento" => $request->complemento,
+                    "cidade" => $request->cidade,
+                    "estado" => $request->estado
+                ]);
+            }
+        }
+        return [$c, $e];
+
     }
 
     public function destroy(Cliente $cliente)
