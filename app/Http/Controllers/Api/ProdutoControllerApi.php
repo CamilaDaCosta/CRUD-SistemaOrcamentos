@@ -87,9 +87,14 @@ class ProdutoControllerApi extends Controller
     public function update(Request $request, $id)
     {
         $produto = Produto::findOrFail($id);
-        if ($produto->update($request->all())) {
-            return new ProdutoResource($produto);
-        }
+        $produto->update([
+            "descricao" => $request->descricao,
+            "material" => $request->material,
+            "unidade" => $request->unidade,
+            "espessura" => $request->espessura,
+            "valor" => $request->valor
+        ]);
+        return $produto;
     }
 
     /**
