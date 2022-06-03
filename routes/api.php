@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ClienteControllerApi;
 use App\Http\Controllers\Api\EnderecoControllerApi;
 use App\Http\Controllers\Api\ProdutoControllerApi;
+use App\Http\Controllers\Api\OrcamentoControllerApi;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -25,13 +26,15 @@ Route::apiResource('clientes.endereco', EnderecoControllerApi::class);
 
 
 // listar de todos os objetos
-Route::get('produtos', [ProdutoControllerApi::class, 'shwoall']);
+Route::get('produtos', [ProdutoControllerApi::class, 'showall']);
+Route::get('orcamentos', [OrcamentoControllerApi::class, 'showall']);
 
 // listar um objeto por ID
 Route::get('produto/{id}', [ProdutoControllerApi::class, 'show']);
 
 // salvar novo objeto
 Route::post('produto', [ProdutoControllerApi::class, 'store']);
+Route::post('orcamento', [OrcamentoControllerApi::class, 'store']);
 
 // atualizar objeto
 Route::put('produto/{id}', [ProdutoControllerApi::class, 'update']);

@@ -14,7 +14,7 @@ class ProdutoControllerApi extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function shwoall()
+    public function showall()
     {
         $todosProdutos = Produto::paginate(15);
         return ProdutoResource::collection($todosProdutos);
