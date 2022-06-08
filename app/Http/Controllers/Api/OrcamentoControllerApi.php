@@ -47,10 +47,12 @@ class OrcamentoControllerApi extends Controller
 
         $orcamento = new Orcamento;
 
-        $orcamento->cliente_id = $request->input('id_cliente');
+        $orcamento->cliente_id = $request->input('cliente_id');
         $orcamento->data = $request->input('data');
         $orcamento->situacao = $request->input('situacao');
         $orcamento->valorTotal = 0;
+
+        ///PRODUTOS DO ORCAMENTO
 
         $orcamento->save();
 
