@@ -12,6 +12,6 @@ class Produto extends Model
 
     public function orcamentosDoProduto()
     {
-        return $this->belongsToMany(Orcamento::class, 'orcamento_produtos');
+        return $this->belongsToMany(Orcamento::class, 'orcamento_produtos')->withPivot(['quantidade']);
     }
 }

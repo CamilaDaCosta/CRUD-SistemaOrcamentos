@@ -25,10 +25,15 @@ class OrcamentoControllerApi extends Controller
      * @return \Illuminate\Http\Response
      */
     public function showall()
+
+
     {
-        return $this->orcamento->with('produtosDoOrcamento')->paginate();
-        /*$todosOrcamentos = Orcamento::paginate(15);
-        return OrcamentoResource::collection($todosOrcamentos);*/
+        return $this->orcamento->with(
+            [
+                'cliente',
+                'produtosDoOrcamento'
+            ]
+        )->paginate();
     }
 
     /**
@@ -42,12 +47,44 @@ class OrcamentoControllerApi extends Controller
 
         $orcamento = new Orcamento;
 
-        $orcamento->id_cliente = $request->input('id_cliente');
+        $orcamento->cliente_id = $request->input('id_cliente');
         $orcamento->data = $request->input('data');
         $orcamento->situacao = $request->input('situacao');
         $orcamento->valorTotal = 0;
 
         $orcamento->save();
+
+
+        /*
+        $idProduto = $request->input('id_produto');
+        foreach ($idProduto as $id) {
+            $op = new OrcamentoProdutos;
+            $op->produto_id = $id;
+            $op->orcamento_id = $orcamento->id;
+        }
+        */
+        /*
+        $produtos = collect($request->input('id_produtos', []))
+            ->map(function ($produtos) {
+                return ['quantidade' => $produtos];
+            });
+        */
+        /*
+        $orcamento->produtosDoOrcamento()->sync(
+            [
+                $request->input('id_produto',),
+                $request->input('quantidade',)
+            ]
+        );
+*/
+
+        $orcamentoProdutos = new OrcamentoProdutos;
+
+        $orcamentoProdutos->produto_id = $request->input('id_produto');
+        $orcamentoProdutos->quantidade = $request->input('quantidade');
+        $orcamentoProdutos->orcamento_id = $orcamento->id;
+        $orcamentoProdutos->save();
+
 
         return $orcamento;
     }
@@ -61,7 +98,13 @@ class OrcamentoControllerApi extends Controller
     public function show($id)
     {
         $orcamento = Orcamento::FindOrFail($id);
-        return new OrcamentoResource($orcamento);
+        dd($this->orcamento->with('produtosDoOrcamento'));
+        return $orcamento->with(
+            [
+                'cliente',
+                'produtosDoOrcamento'
+            ]
+        );
     }
 
     /**

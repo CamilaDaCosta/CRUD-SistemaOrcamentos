@@ -31,6 +31,7 @@ Route::get('orcamentos', [OrcamentoControllerApi::class, 'showall']);
 
 // listar um objeto por ID
 Route::get('produto/{id}', [ProdutoControllerApi::class, 'show']);
+Route::get('orcamento/{id}', [OrcamentoControllerApi::class, 'show']);
 
 // salvar novo objeto
 Route::post('produto', [ProdutoControllerApi::class, 'store']);
