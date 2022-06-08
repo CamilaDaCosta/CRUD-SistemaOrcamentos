@@ -50,43 +50,14 @@ class OrcamentoControllerApi extends Controller
         $orcamento->cliente_id = $request->input('cliente_id');
         $orcamento->data = $request->input('data');
         $orcamento->situacao = $request->input('situacao');
-        $orcamento->valorTotal = 0;
-
-        ///PRODUTOS DO ORCAMENTO
-
+        $orcamento->valorTotal = $request->input('valortotal');
         $orcamento->save();
 
-
-        /*
-        $idProduto = $request->input('id_produto');
-        foreach ($idProduto as $id) {
-            $op = new OrcamentoProdutos;
-            $op->produto_id = $id;
-            $op->orcamento_id = $orcamento->id;
-        }
-        */
-        /*
-        $produtos = collect($request->input('id_produtos', []))
+        $produtos = collect($request->input('produtos', []))
             ->map(function ($produtos) {
                 return ['quantidade' => $produtos];
             });
-        */
-        /*
-        $orcamento->produtosDoOrcamento()->sync(
-            [
-                $request->input('id_produto',),
-                $request->input('quantidade',)
-            ]
-        );
-*/
-
-        $orcamentoProdutos = new OrcamentoProdutos;
-
-        $orcamentoProdutos->produto_id = $request->input('id_produto');
-        $orcamentoProdutos->quantidade = $request->input('quantidade');
-        $orcamentoProdutos->orcamento_id = $orcamento->id;
-        $orcamentoProdutos->save();
-
+        $orcamento->produtosDoOrcamento()->sync($produtos);
 
         return $orcamento;
     }
@@ -101,12 +72,7 @@ class OrcamentoControllerApi extends Controller
     {
         $orcamento = Orcamento::FindOrFail($id);
         dd($this->orcamento->with('produtosDoOrcamento'));
-        return $orcamento->with(
-            [
-                'cliente',
-                'produtosDoOrcamento'
-            ]
-        );
+        return $orcamento;
     }
 
     /**
