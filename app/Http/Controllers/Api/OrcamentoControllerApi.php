@@ -71,8 +71,9 @@ class OrcamentoControllerApi extends Controller
     public function show($id)
     {
         $orcamento = Orcamento::FindOrFail($id);
-        dd($this->orcamento->with('produtosDoOrcamento'));
-        return $orcamento;
+        $cliente = $orcamento->cliente;
+        $produtos = $orcamento->produtosDoOrcamento;
+        return [$orcamento, $cliente, $produtos];
     }
 
     /**
