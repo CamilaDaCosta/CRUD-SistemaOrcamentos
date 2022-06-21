@@ -17,8 +17,11 @@ class ClienteControllerApi extends Controller
         $this->endereco = $endereco;
     }
 
-    public function index()
+    public function index(Request $request)
     { //RETORNA TODOS OS CLIENTES SEUS DADOS DE CADASTRO E ENDERECO
+        if($request->key){
+            return $this->cliente->with('endereco')->where('id','LIKE','%'.$request->key.'%')->get();
+        }
         return $this->cliente->with('endereco')->paginate();
     }
 
