@@ -42,3 +42,4 @@ Route::put('produto/{id}', [ProdutoControllerApi::class, 'update']);
 
 // deletar objeto
 Route::delete('produto/{id}', [ProdutoControllerApi::class, 'destroy']);
+Route::delete('orcamento/{id}', [OrcamentoControllerApi::class, 'destroy']);

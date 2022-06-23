@@ -19,21 +19,13 @@ class OrcamentoControllerApi extends Controller
         $this->orcamento = $orcamento;
         $this->orcamentoProdutos = $orcamentoProdutos;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showall()
 
-
+    public function showall(Request $request)
     {
-        return $this->orcamento->with(
-            [
-                'cliente',
-                'produtosDoOrcamento'
-            ]
-        )->paginate();
+        if($request->key){
+            return $this->orcamento->with(['cliente','produtosDoOrcamento'])->where('situacao','like','%'.$request->key.'%')->get();
+        }
+        return $this->orcamento->with(['cliente','produtosDoOrcamento'])->paginate();
     }
 
     /**
